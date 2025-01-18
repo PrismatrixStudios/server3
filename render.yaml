@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: minecraft-server
+    env: docker
+    plan: standard
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+    dockerfilePath: ./Dockerfile
+    disk:
+      name: minecraft-data
+      mountPath: /minecraft/world
+      sizeGB: 10
+    envVars:
+      - key: MINECRAFT_PORT
+        value: 25565
+    ports:
+      - port: 25565
+        protocol: tcp
+    healthCheckPath: /
